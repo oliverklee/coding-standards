@@ -41,17 +41,17 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
      */
     protected static $typo3Rules = [
         '@DoctrineAnnotation' => true,
-        // @todo: Switch to @PER-CS2.0 once php-cs-fixer's todo list is done: https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues/7247
-        '@PER-CS1.0' => true,
+        // @todo: Switch to @PER-CS2x0 once php-cs-fixer's todo list is done: https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues/7247
+        '@PER-CS1x0' => true,
         'array_indentation' => true,
         'array_syntax' => ['syntax' => 'short'],
         'cast_spaces' => ['space' => 'none'],
-        // @todo: Can be dropped once we enable @PER-CS2.0
+        // @todo: Can be dropped once we enable @PER-CS2x0
         'concat_space' => ['spacing' => 'one'],
         'declare_equal_normalize' => ['space' => 'none'],
         'declare_parentheses' => true,
         'dir_constant' => true,
-        // @todo: Can be dropped once we enable @PER-CS2.0
+        // @todo: Can be dropped once we enable @PER-CS2x0
         'function_declaration' => [
             'closure_fn_spacing' => 'none',
         ],
@@ -59,7 +59,7 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         'type_declaration_spaces' => true,
         'global_namespace_import' => ['import_classes' => false, 'import_constants' => false, 'import_functions' => false],
         'list_syntax' => ['syntax' => 'short'],
-        // @todo: Can be dropped once we enable @PER-CS2.0
+        // @todo: Can be dropped once we enable @PER-CS2x0
         'method_argument_space' => true,
         'modernize_strpos' => true,
         'modernize_types_casting' => true,
@@ -112,11 +112,12 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         'phpdoc_trim' => true,
         'phpdoc_types' => true,
         'phpdoc_types_order' => ['null_adjustment' => 'always_last', 'sort_algorithm' => 'none'],
+        'protected_to_private' => true,
         'return_type_declaration' => ['space_before' => 'none'],
         'single_quote' => true,
         'single_space_around_construct' => true,
         'single_line_comment_style' => ['comment_types' => ['hash']],
-        // @todo: Can be dropped once we enable @PER-CS2.0
+        // @todo: Can be dropped once we enable @PER-CS2x0
         'single_line_empty_body' => true,
         'trailing_comma_in_multiline' => ['elements' => ['arrays']],
         'whitespace_after_comma_in_array' => ['ensure_single_space' => true],
