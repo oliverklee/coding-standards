@@ -55,15 +55,33 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         'function_declaration' => [
             'closure_fn_spacing' => 'none',
         ],
-        'function_to_constant' => ['functions' => ['get_called_class', 'get_class', 'get_class_this', 'php_sapi_name', 'phpversion', 'pi']],
+        'function_to_constant' => [
+            'functions' => [
+                'get_called_class',
+                'get_class',
+                'get_class_this',
+                'php_sapi_name',
+                'phpversion',
+                'pi',
+            ],
+        ],
         'type_declaration_spaces' => true,
-        'global_namespace_import' => ['import_classes' => false, 'import_constants' => false, 'import_functions' => false],
+        'global_namespace_import' => [
+            'import_classes' => false,
+            'import_constants' => false,
+            'import_functions' => false,
+        ],
         'list_syntax' => ['syntax' => 'short'],
         // @todo: Can be dropped once we enable @PER-CS2x0
         'method_argument_space' => true,
         'modernize_strpos' => true,
         'modernize_types_casting' => true,
         'native_function_casing' => true,
+        'native_function_invocation' => [
+            'include' => [],
+            'scope' => 'all',
+            'strict' => true,
+        ],
         'no_alias_functions' => true,
         'no_blank_lines_after_phpdoc' => true,
         'no_empty_phpdoc' => true,
@@ -87,7 +105,8 @@ class CsFixerConfig extends Config implements CsFixerConfigInterface
         'ordered_imports' => ['imports_order' => ['class', 'function', 'const'], 'sort_algorithm' => 'alpha'],
         'php_unit_construct' => ['assertions' => ['assertEquals', 'assertSame', 'assertNotEquals', 'assertNotSame']],
         'php_unit_mock_short_will_return' => true,
-        'php_unit_test_case_static_method_calls' => ['call_type' => 'self',
+        'php_unit_test_case_static_method_calls' => [
+            'call_type' => 'self',
             'methods' => [
                 'any' => 'this',
                 'atLeast' => 'this',
