@@ -21,13 +21,3 @@ jobs:
           pattern: '^[^#].{1,74}'
           flags: 'gm'
           error: 'The maximum line length of 74 characters is exceeded.'
-
-  assign_labels:
-    name: Assign Labels
-    needs: check_commit_message
-    runs-on: ubuntu-latest
-    steps:
-      - name: Assign and check labels
-        uses: fuxingloh/multi-labeler@v2
-        with:
-          config-path: .github/pr-labeler.yml
