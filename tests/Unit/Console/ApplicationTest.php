@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the TYPO3 project.
  *
- * (c) 2019-2024 Benni Mack
+ * (c) 2019-2026 Benni Mack
  *               Simon Gilli
  *
  * For the full copyright and license information, please view
@@ -16,7 +16,6 @@ declare(strict_types=1);
 
 namespace TYPO3\CodingStandards\Tests\Unit\Console;
 
-use RuntimeException;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Tester\ApplicationTester;
 use TYPO3\CodingStandards\Console\Application;
@@ -51,7 +50,7 @@ final class ApplicationTest extends TestCase
     public function testGetTargetDir(): void
     {
         $testPath = self::getTestPath();
-        \mkdir($testPath . '/test-target');
+        mkdir($testPath . '/test-target');
 
         $input = new ArrayInput([]);
         self::assertSame($testPath, Application::getTargetDir($input));
@@ -65,7 +64,7 @@ final class ApplicationTest extends TestCase
 
     public function testGetTargetDirThrowsOnInvalidPath(): void
     {
-        self::expectException(RuntimeException::class);
+        self::expectException(\RuntimeException::class);
         self::expectExceptionMessageMatches('#Invalid target directory specified, /.*/invalid-target does not exist.#');
 
         self::getTestPath();

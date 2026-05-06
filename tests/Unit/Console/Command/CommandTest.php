@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the TYPO3 project.
  *
- * (c) 2019-2024 Benni Mack
+ * (c) 2019-2026 Benni Mack
  *               Simon Gilli
  *
  * For the full copyright and license information, please view
@@ -54,7 +54,7 @@ final class CommandTest extends CommandTestCase
     public function testGetTargetDir(): void
     {
         $testPath = self::getTestPath();
-        \mkdir($testPath . '/test-target');
+        mkdir($testPath . '/test-target');
 
         /** @var CommandTestImplementation $baseCommand */
         $baseCommand = $this->getCommand('');

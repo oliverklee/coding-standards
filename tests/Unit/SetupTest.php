@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the TYPO3 project.
  *
- * (c) 2019-2024 Benni Mack
+ * (c) 2019-2026 Benni Mack
  *               Simon Gilli
  *
  * For the full copyright and license information, please view
@@ -16,8 +16,6 @@ declare(strict_types=1);
 
 namespace TYPO3\CodingStandards\Tests\Unit;
 
-use Generator;
-use RuntimeException;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use TYPO3\CodingStandards\Setup;
@@ -153,7 +151,7 @@ final class SetupTest extends TestCase
     }
 
     /**
-     * @return Generator<string, array{
+     * @return \Generator<string, array{
      *   existingFiles: array<string, string>,
      *   force: bool,
      *   expectedResult: int,
@@ -161,7 +159,7 @@ final class SetupTest extends TestCase
      *   expectedFiles: array<string, bool|string>
      * }>
      */
-    public static function scenariosProvider(): Generator
+    public static function scenariosProvider(): \Generator
     {
         yield 'all files are created' => [
             'existingFiles' => [],
@@ -339,9 +337,9 @@ final class SetupTest extends TestCase
     }
 
     /**
-     * @return Generator<string, array<string, string>>
+     * @return \Generator<string, array<string, string>>
      */
-    public static function typeDataProvider(): Generator
+    public static function typeDataProvider(): \Generator
     {
         foreach (Setup::VALID_TYPES as $type) {
             yield $type => [
@@ -354,7 +352,7 @@ final class SetupTest extends TestCase
     {
         $testPath = self::getTestPath() . '/invalid-path';
 
-        self::expectException(RuntimeException::class);
+        self::expectException(\RuntimeException::class);
         self::expectExceptionMessageMatches('#.+(invalid-path).+#');
 
         new Setup($testPath);
@@ -377,7 +375,7 @@ final class SetupTest extends TestCase
 
     public function testInvalidTypeThrows(): void
     {
-        self::expectException(RuntimeException::class);
+        self::expectException(\RuntimeException::class);
         self::expectExceptionMessageMatches('#.+(type).+#');
 
         $setup = new Setup(self::getTestPath());

@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the TYPO3 project.
  *
- * (c) 2019-2024 Benni Mack
+ * (c) 2019-2026 Benni Mack
  *               Simon Gilli
  *
  * For the full copyright and license information, please view
@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace TYPO3\CodingStandards\Tests\Unit\Smoke;
 
 use Keradus\CliExecutor\CommandExecutor;
-use RuntimeException;
 use TYPO3\CodingStandards\Console\Application;
 use TYPO3\CodingStandards\Tests\Unit\TestCase;
 
@@ -54,20 +53,20 @@ final class InstallViaComposerTest extends TestCase
 
         try {
             CommandExecutor::create('php --version', __DIR__)->getResult();
-        } catch (RuntimeException $runtimeException) {
+        } catch (\RuntimeException $runtimeException) {
             self::markTestIncomplete('Missing `php` env script. Details:' . "\n" . $runtimeException->getMessage());
         }
 
         try {
             CommandExecutor::create('composer --version', __DIR__)->getResult();
-        } catch (RuntimeException $runtimeException) {
+        } catch (\RuntimeException $runtimeException) {
             self::markTestIncomplete('Missing `composer` env script. Details:' . "\n" . $runtimeException->getMessage());
         }
 
         try {
             CommandExecutor::create('composer check', self::getRootPath())->getResult();
-        } catch (RuntimeException $runtimeException) {
-            if (\getenv('EXPERIMENTAL') !== 'true') {
+        } catch (\RuntimeException $runtimeException) {
+            if (getenv('EXPERIMENTAL') !== 'true') {
                 self::markTestIncomplete('Composer check failed. Details:' . "\n" . $runtimeException->getMessage());
             }
         }
@@ -105,7 +104,7 @@ final class InstallViaComposerTest extends TestCase
     public function testInstallationViaArtifactIsPossible(): void
     {
         // Composer Artifact Repository requires `zip` extension
-        if (!\extension_loaded('zip')) {
+        if (!extension_loaded('zip')) {
             self::markTestIncomplete('No zip extension available.');
         }
 

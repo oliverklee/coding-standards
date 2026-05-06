@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the TYPO3 project.
  *
- * (c) 2019-2024 Benni Mack
+ * (c) 2019-2026 Benni Mack
  *               Simon Gilli
  *
  * For the full copyright and license information, please view
@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace TYPO3\CodingStandards\Tests\Unit;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
-use RuntimeException;
 use Symfony\Component\Filesystem\Filesystem;
 
 abstract class TestCase extends BaseTestCase
@@ -76,7 +75,7 @@ abstract class TestCase extends BaseTestCase
         return match ($prefix) {
             'TPL' => self::getTemplateFilename($filename),
             'FIX' => self::getFixtureFilename($filename),
-            default => throw new RuntimeException(sprintf('Invalid prefix (%s).', $prefix), 1_636_451_407),
+            default => throw new \RuntimeException(sprintf('Invalid prefix (%s).', $prefix), 1_636_451_407),
         };
     }
 
@@ -102,7 +101,7 @@ abstract class TestCase extends BaseTestCase
 
         $filesystem->remove($testPath);
         $filesystem->mkdir($testPath);
-        \chdir($testPath);
+        chdir($testPath);
 
         return $testPath;
     }
