@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the TYPO3 project.
  *
- * (c) 2019-2024 Benni Mack
+ * (c) 2019-2026 Benni Mack
  *               Simon Gilli
  *
  * For the full copyright and license information, please view
@@ -72,7 +72,7 @@ class SimpleStyle extends OutputStyle
      */
     public function block($messages, $type = null, $style = null, $prefix = ' ', $padding = false, $escape = true): void
     {
-        $messages = \is_array($messages) ? array_values($messages) : [$messages];
+        $messages = is_array($messages) ? array_values($messages) : [$messages];
 
         $this->writeln($this->createBlock($messages, $type, $style, $prefix, $padding, $escape));
     }
@@ -112,7 +112,7 @@ class SimpleStyle extends OutputStyle
      */
     public function text($message): void
     {
-        $messages = \is_array($message) ? array_values($message) : [$message];
+        $messages = is_array($message) ? array_values($message) : [$message];
         foreach ($messages as $message) {
             $this->writeln(sprintf(' %s', $message));
         }
@@ -227,12 +227,12 @@ class SimpleStyle extends OutputStyle
                 $row[] = $value;
                 continue;
             }
-            if (\is_string($value)) {
+            if (is_string($value)) {
                 $headers[] = new TableCell($value, ['colspan' => 2]);
                 $row[] = null;
                 continue;
             }
-            if (!\is_array($value)) {
+            if (!is_array($value)) {
                 throw new InvalidArgumentException('Value should be an array, string, or an instance of TableSeparator.');
             }
             $headers[] = key($value);
@@ -453,7 +453,7 @@ class SimpleStyle extends OutputStyle
 
         if ($type !== null) {
             $type = sprintf('[%s] ', $type);
-            $indentLength = \strlen($type);
+            $indentLength = strlen($type);
             $lineIndentation = str_repeat(' ', $indentLength);
         }
 
@@ -466,7 +466,7 @@ class SimpleStyle extends OutputStyle
             //$lines = array_merge($lines, explode(\PHP_EOL, wordwrap($message, $this->lineLength - $prefixLength - $indentLength, \PHP_EOL, true)));
             $lines = array_merge($lines, [$message]);
 
-            if (\count($messages) > 1 && $key < \count($messages) - 1) {
+            if (count($messages) > 1 && $key < count($messages) - 1) {
                 $lines[] = '';
             }
         }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the TYPO3 project.
  *
- * (c) 2019-2024 Benni Mack
+ * (c) 2019-2026 Benni Mack
  *               Simon Gilli
  *
  * For the full copyright and license information, please view
@@ -16,8 +16,6 @@ declare(strict_types=1);
 
 namespace TYPO3\CodingStandards\Tests\Unit\Console\Command;
 
-use Generator;
-use RuntimeException;
 use TYPO3\CodingStandards\Console\Application;
 use TYPO3\CodingStandards\Console\Command\Command;
 use TYPO3\CodingStandards\Console\Command\SetupCommand;
@@ -38,9 +36,9 @@ final class SetupCommandTest extends SetupCommandTestCase
     }
 
     /**
-     * @return Generator<string, array<string, string>>
+     * @return \Generator<string, array<string, string>>
      */
-    public static function typeDataProvider(): Generator
+    public static function typeDataProvider(): \Generator
     {
         foreach (Setup::VALID_TYPES as $type) {
             yield $type => [
@@ -55,7 +53,7 @@ final class SetupCommandTest extends SetupCommandTestCase
 
         $commandTester = $this->getCommandTester('setup');
 
-        self::expectException(RuntimeException::class);
+        self::expectException(\RuntimeException::class);
         self::expectExceptionMessageMatches('#.+(type).+#');
 
         $commandTester->execute($this->getInput($testPath));
@@ -69,7 +67,7 @@ final class SetupCommandTest extends SetupCommandTestCase
 
         $commandTester = $this->getCommandTester('setup');
 
-        self::expectException(RuntimeException::class);
+        self::expectException(\RuntimeException::class);
         self::expectExceptionMessageMatches('#.+(type).+#');
 
         $commandTester->execute($this->getInput($testPath));
@@ -90,7 +88,7 @@ final class SetupCommandTest extends SetupCommandTestCase
         array $expectedFiles
     ): void {
         $testPath = self::getTestPath();
-        $targetPath = \rtrim($testPath . '/' . $targetDir, '/');
+        $targetPath = rtrim($testPath . '/' . $targetDir, '/');
         self::getFilesystem()->mkdir($targetPath);
 
         self::createFiles($testPath, $existingFiles);
@@ -111,7 +109,7 @@ final class SetupCommandTest extends SetupCommandTestCase
     }
 
     /**
-     * @return Generator<string, array{
+     * @return \Generator<string, array{
      *   existingFiles: array<string, string>,
      *   targetDir: string,
      *   force: bool,
@@ -120,7 +118,7 @@ final class SetupCommandTest extends SetupCommandTestCase
      *   expectedFiles: array<string, bool|string>
      * }>
      */
-    public static function setupDataProvider(): Generator
+    public static function setupDataProvider(): \Generator
     {
         yield 'auto-detect extension from type' => [
             'existingFiles' => [

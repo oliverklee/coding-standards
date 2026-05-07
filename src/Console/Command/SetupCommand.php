@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the TYPO3 project.
  *
- * (c) 2019-2024 Benni Mack
+ * (c) 2019-2026 Benni Mack
  *               Simon Gilli
  *
  * For the full copyright and license information, please view
@@ -16,7 +16,6 @@ declare(strict_types=1);
 
 namespace TYPO3\CodingStandards\Console\Command;
 
-use RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -73,7 +72,7 @@ final class SetupCommand extends Command
     }
 
     /**
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     private function getType(InputInterface $input): string
     {
@@ -84,22 +83,22 @@ final class SetupCommand extends Command
 
             $composerManifest = $this->getProjectDir() . '/composer.json';
             if (!file_exists($composerManifest)) {
-                throw new RuntimeException(sprintf($composerManifestError, 'found'));
+                throw new \RuntimeException(sprintf($composerManifestError, 'found'));
             }
 
-            $composerManifest = \file_get_contents($composerManifest);
+            $composerManifest = file_get_contents($composerManifest);
             if ($composerManifest === false) {
-                throw new RuntimeException(sprintf($composerManifestError, 'read')); // @codeCoverageIgnore
+                throw new \RuntimeException(sprintf($composerManifestError, 'read')); // @codeCoverageIgnore
             }
 
-            $composerManifest = \json_decode($composerManifest, true);
+            $composerManifest = json_decode($composerManifest, true);
             if ($composerManifest === false || !is_array($composerManifest)) {
-                throw new RuntimeException(sprintf($composerManifestError, 'decoded'));
+                throw new \RuntimeException(sprintf($composerManifestError, 'decoded'));
             }
 
             if (
-                ($composerManifest['type'] ?? '') === 'typo3-cms-extension' ||
-                ($composerManifest['extra']['typo3/cms']['extension-key'] ?? '') !== ''
+                ($composerManifest['type'] ?? '') === 'typo3-cms-extension'
+                || ($composerManifest['extra']['typo3/cms']['extension-key'] ?? '') !== ''
             ) {
                 $type = Setup::EXTENSION;
             } else {
@@ -120,11 +119,11 @@ final class SetupCommand extends Command
 
         $result = true;
 
-        if (\in_array(Setup::RULE_SET_EDITORCONFIG, $ruleSets, true)) {
+        if (in_array(Setup::RULE_SET_EDITORCONFIG, $ruleSets, true)) {
             $result = $setup->copyEditorConfig($force);
         }
 
-        if (\in_array(Setup::RULE_SET_PHP_CS_FIXER, $ruleSets, true)) {
+        if (in_array(Setup::RULE_SET_PHP_CS_FIXER, $ruleSets, true)) {
             $result = $setup->copyPhpCsFixerConfig($force, $type) && $result;
         }
 

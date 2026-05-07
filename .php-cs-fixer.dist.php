@@ -6,7 +6,7 @@ $config
         <<<EOM
         This file is part of the TYPO3 project.
 
-        (c) 2019-2024 Benni Mack
+        (c) 2019-2026 Benni Mack
                       Simon Gilli
 
         For the full copyright and license information, please view
@@ -17,55 +17,98 @@ $config
         true
     )
     ->addRules([
-        '@PER:risky' => true,
-        '@PHP80Migration:risky' => true,
-        '@PHP81Migration' => true,
-        'declare_strict_types' => true,
-        'fully_qualified_strict_types' => true,
+        '@DoctrineAnnotation' => true,
+        '@PER-CS3x0' => true,
+        // Override PER-CS3x0 default (single) to keep no space after cast operators
+        'cast_spaces' => ['space' => 'none'],
+        'declare_parentheses' => true,
+        'dir_constant' => true,
+        'function_to_constant' => [
+            'functions' => [
+                'get_called_class',
+                'get_class',
+                'get_class_this',
+                'php_sapi_name',
+                'phpversion',
+                'pi',
+            ],
+        ],
+        'type_declaration_spaces' => true,
         'global_namespace_import' => [
-            'import_classes' => true,
+            'import_classes' => false,
             'import_constants' => false,
             'import_functions' => false,
         ],
-        'no_unneeded_import_alias' => true,
-        'ordered_imports' => [
-            'imports_order' => ['class', 'function', 'const'],
-            'sort_algorithm' => 'alpha',
+        'list_syntax' => ['syntax' => 'short'],
+        'modernize_strpos' => true,
+        'modernize_types_casting' => true,
+        'native_function_casing' => true,
+        'native_function_invocation' => [
+            'include' => [],
+            'scope' => 'all',
+            'strict' => true,
         ],
-        'phpdoc_align' => true,
-        'phpdoc_annotation_without_dot' => true,
-        'phpdoc_indent' => true,
-        'phpdoc_inline_tag_normalizer' => true,
-        'phpdoc_line_span' => true,
-        'phpdoc_no_useless_inheritdoc' => true,
-        'phpdoc_order' => true,
-        'phpdoc_order_by_value' => true,
-        'phpdoc_separation' => true,
-        'phpdoc_single_line_var_spacing' => true,
-        'phpdoc_summary' => true,
-        'phpdoc_tag_casing' => true,
-        'phpdoc_tag_type' => true,
-        'phpdoc_to_comment' => [
-            'ignored_tags' => [
-                'phpstan-ignore-line',
-                'phpstan-ignore-next-line',
-                'todo',
+        'no_alias_functions' => true,
+        'no_blank_lines_after_phpdoc' => true,
+        'no_empty_phpdoc' => true,
+        'no_empty_statement' => true,
+        'no_extra_blank_lines' => true,
+        'no_leading_namespace_whitespace' => true,
+        'no_null_property_initialization' => true,
+        'no_short_bool_cast' => true,
+        'no_singleline_whitespace_before_semicolons' => true,
+        'no_superfluous_elseif' => true,
+        'no_trailing_comma_in_singleline' => true,
+        'no_unneeded_control_parentheses' => true,
+        'no_unused_imports' => true,
+        'no_useless_else' => true,
+        'no_useless_nullsafe_operator' => true,
+        // Override PER-CS3x0 default (union) to keep ?Type shorthand syntax
+        'nullable_type_declaration' => [
+            'syntax' => 'question_mark',
+        ],
+        'nullable_type_declaration_for_default_null_value' => true,
+        'ordered_class_elements' => ['order' => ['use_trait', 'case', 'constant', 'property']],
+        'ordered_imports' => ['imports_order' => ['class', 'function', 'const'], 'sort_algorithm' => 'alpha'],
+        'php_unit_construct' => ['assertions' => ['assertEquals', 'assertSame', 'assertNotEquals', 'assertNotSame']],
+        'php_unit_mock_short_will_return' => true,
+        'php_unit_test_case_static_method_calls' => [
+            'call_type' => 'self',
+            'methods' => [
+                'any' => 'this',
+                'atLeast' => 'this',
+                'atLeastOnce' => 'this',
+                'atMost' => 'this',
+                'exactly' => 'this',
+                'never' => 'this',
+                'onConsecutiveCalls' => 'this',
+                'once' => 'this',
+                'returnArgument' => 'this',
+                'returnCallback' => 'this',
+                'returnSelf' => 'this',
+                'returnValue' => 'this',
+                'returnValueMap' => 'this',
+                'throwException' => 'this',
             ],
         ],
-        'phpdoc_trim_consecutive_blank_line_separation' => true,
-        'phpdoc_types_order' => [
-            'null_adjustment' => 'always_last',
-            'sort_algorithm' => 'alpha',
-        ],
-        'phpdoc_var_annotation_correct_order' => true,
-        'phpdoc_var_without_name' => true,
-        'self_accessor' => true,
+        'phpdoc_no_access' => true,
+        'phpdoc_no_empty_return' => true,
+        'phpdoc_no_package' => true,
+        'phpdoc_scalar' => true,
+        'phpdoc_trim' => true,
+        'phpdoc_types' => true,
+        'phpdoc_types_order' => ['null_adjustment' => 'always_last', 'sort_algorithm' => 'none'],
+        'protected_to_private' => true,
+        'single_quote' => true,
+        'single_line_comment_style' => ['comment_types' => ['hash']],
+        'trailing_comma_in_multiline' => ['elements' => ['arrays']],
+        'whitespace_after_comma_in_array' => ['ensure_single_space' => true],
+        'yoda_style' => ['equal' => false, 'identical' => false, 'less_and_greater' => false],
     ])
     ->getFinder()
     ->exclude('templates')
     ->exclude('tests/Unit/Fixtures')
     ->in(__DIR__)
-    ->append(['typo3-coding-standards'])
-;
+    ->append(['typo3-coding-standards']);
 
 return $config;

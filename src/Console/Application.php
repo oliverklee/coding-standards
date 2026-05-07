@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the TYPO3 project.
  *
- * (c) 2019-2024 Benni Mack
+ * (c) 2019-2026 Benni Mack
  *               Simon Gilli
  *
  * For the full copyright and license information, please view
@@ -16,7 +16,6 @@ declare(strict_types=1);
 
 namespace TYPO3\CodingStandards\Console;
 
-use RuntimeException;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
@@ -38,7 +37,7 @@ final class Application extends BaseApplication
     /**
      * getcwd() equivalent which always returns a string.
      *
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     private static function getCwd(bool $allowEmpty = false): string
     {
@@ -57,7 +56,7 @@ final class Application extends BaseApplication
                 return '';
             }
 
-            throw new RuntimeException('Could not determine the current working directory');
+            throw new \RuntimeException('Could not determine the current working directory');
         }
 
         // @codeCoverageIgnoreEnd
@@ -71,7 +70,7 @@ final class Application extends BaseApplication
     }
 
     /**
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     public static function getTargetDir(InputInterface $input): string
     {
@@ -87,7 +86,7 @@ final class Application extends BaseApplication
         }
 
         if (!is_dir($targetDir)) {
-            throw new RuntimeException(\sprintf('Invalid target directory specified, %s does not exist.', $targetDir));
+            throw new \RuntimeException(sprintf('Invalid target directory specified, %s does not exist.', $targetDir));
         }
 
         return $targetDir;
